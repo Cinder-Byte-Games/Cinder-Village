@@ -16,8 +16,6 @@ jobs:
       - name: Install CSharpier tool
         run: dotnet tool install -g csharpier
       - name: Run CSharpier (check only)
-        env:
-          PATH: ${{ env.PATH }}:${{ runner.tool_cache }}/dotnet/tools:~/.dotnet/tools
         run: |
           export PATH="$PATH:$HOME/.dotnet/tools"
           csharpier --check "**/*.cs"
