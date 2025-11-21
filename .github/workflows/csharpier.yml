@@ -1,0 +1,23 @@
+name: CSharpier check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  csharpier:
+    name: CSharpier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+      - name: Install CSharpier tool
+        run: dotnet tool install -g csharpier
+      - name: Run CSharpier (check only)
+        env:
+          PATH: ${{ env.PATH }}:${{ runner.tool_cache }}/dotnet/tools:~/.dotnet/tools
+        run: |
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          csharpier --check "**/*.cs"
