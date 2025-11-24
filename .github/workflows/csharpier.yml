@@ -3,6 +3,9 @@ name: CSharpier check
 on:
   pull_request:
     branches: [ main ]
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   csharpier:
@@ -10,16 +13,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install CSharpier to repo-local tools
-        run: dotnet tool install --tool-path ./.dotnet/tools csharpier --version 0.28.2
+      - name: Cache CSharpier tool
+        uses: actions/cache@v4
+        with:
+          path: ./.dotnet/tools
+          key: ${{ runner.os }}-csharpier-0.28.2
 
-      - name: Add repo-local tools to PATH
-        run: echo "${{ github.workspace }}/.dotnet/tools" >> $GITHUB_PATH
+      - name: Install CSharpier to repo-local tools (if missing)
+        run: |
+          if [ ! -x ./.dotnet/tools/csharpier ]; then
+            dotnet tool install --tool-path ./.dotnet/tools csharpier --version 0.28.2
+          fi
+
+      - name: Show CSharpier version
+        run: ./.dotnet/tools/csharpier --version
 
       - name: Run CSharpier (check only)
-        run: csharpier --check "**/*.cs"
+        run: ./.dotnet/tools/csharpier --check '**/*.cs'
