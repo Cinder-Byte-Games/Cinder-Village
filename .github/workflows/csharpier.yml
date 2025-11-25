@@ -1,25 +1,15 @@
-name: CSharpier check
+name: format-check
 
 on:
   pull_request:
-    branches: [ main ]
-
+    branches: [ "main" ]
 jobs:
-  csharpier:
-    name: CSharpier
+  csharp-format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
-
-      - name: Install CSharpier to repo-local tools
-        run: dotnet tool install --tool-path ./.dotnet/tools csharpier --version 0.28.2
-
-      - name: Add repo-local tools to PATH
-        run: echo "${{ github.workspace }}/.dotnet/tools" >> $GITHUB_PATH
-
-      - name: Run CSharpier (check only)
-        run: csharpier --check "**/*.cs"
+          dotnet-version: "8.0.x"
+      - run: dotnet tool restore
+      - run: dotnet csharpier check .
