@@ -1,7 +1,7 @@
 class Hello
 {
-    static void Main (string[] args)
+    static void Main(string[] args)
     {
-        //test
+        //test added some
     }
 }
