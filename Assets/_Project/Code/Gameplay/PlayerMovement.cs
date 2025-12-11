@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     // SerializeField lets you edit this private field in the Inspector.
     // moveSpeed controls how fast the player moves.
     [SerializeField]
-    private readonly float moveSpeed = 5f;
+    private float moveSpeed = 5f;
 
     // Cached references to components on the same GameObject.
     private Rigidbody2D rb;

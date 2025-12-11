@@ -14,5 +14,9 @@ public class PlayerInputHandler : MonoBehaviour
         {
             MoveInput = context.ReadValue<Vector2>();
         }
+        else if (context.canceled)
+        {
+            MoveInput = Vector2.zero;
+        }
     }
 }
