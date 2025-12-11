@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        // Grab the Rigidbody2D component Unity ensures exists (because of RequireComponent).
+        // Grab the Rigidbody2D component. The null check below ensures it exists.
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
