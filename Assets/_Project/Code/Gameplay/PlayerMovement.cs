@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// RequireComponent tells Unity to auto-add a Rigidbody2D if missing on this GameObject.
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     // SerializeField lets you edit this private field in the Inspector.
@@ -17,15 +15,28 @@ public class PlayerMovement : MonoBehaviour
     {
         // Grab the Rigidbody2D component Unity ensures exists (because of RequireComponent).
         rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("PlayerMovement requires a Rigidbody2D component!", this);
+            enabled = false;
+            return;
+        }
+
         // Grab the PlayerInputHandler to read input values.
         input = GetComponent<PlayerInputHandler>();
+        if (input == null)
+        {
+            Debug.LogError("PlayerMovement requires a PlayerInputHandler component!", this);
+            enabled = false;
+            return;
+        }
     }
 
     // FixedUpdate runs at a fixed timestep, ideal for physics interactions.
     private void FixedUpdate()
     {
-        // Read the movement input if available; otherwise default to zero movement.
-        Vector2 move = input != null ? input.MoveInput : Vector2.zero;
+        // Read the movement input
+        Vector2 move = input.MoveInput;
 
         // Apply the velocity: direction (move) times speed.
         // linearVelocity sets the Rigidbody2D's movement directly.
