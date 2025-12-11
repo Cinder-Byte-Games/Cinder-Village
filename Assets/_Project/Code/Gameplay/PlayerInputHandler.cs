@@ -9,7 +9,10 @@ public class PlayerInputHandler : MonoBehaviour
     // Called by Unity’s Input System when the Move action updates.
     public void OnMove(InputAction.CallbackContext context)
     {
-        // Read the current 2D input value (e.g., WASD/left stick) and store it.
-        MoveInput = context.ReadValue<Vector2>();
+        // Only read the value if the context is in the performed or started state.
+        if (context.performed || context.started)
+        {
+            MoveInput = context.ReadValue<Vector2>();
+        }
     }
 }
