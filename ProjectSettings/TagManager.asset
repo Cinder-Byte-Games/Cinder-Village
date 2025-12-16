@@ -42,22 +42,25 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Ground
-    uniqueID: 387954627
-    locked: 0
-  - name: WalkInFront
     uniqueID: 2003859061
     locked: 0
-  - name: Collision
-    uniqueID: 180070009
-    locked: 0
-  - name: Player
+  - name: GroundOverlay
     uniqueID: 1506990247
     locked: 0
-  - name: WalkBehind
+  - name: Water
+    uniqueID: 2225927577
+    locked: 0
+  - name: Props
     uniqueID: 3607486135
     locked: 0
-  - name: Decor
-    uniqueID: 81738529
+  - name: Characters
+    uniqueID: 265957455
+    locked: 0
+  - name: Foreground
+    uniqueID: 2051887097
+    locked: 0
+  - name: UI
+    uniqueID: 3080004183
     locked: 0
   m_RenderingLayers:
   - Default
