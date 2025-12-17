@@ -64,9 +64,9 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-        "*.sln": "*.csproj",
+        "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Cinder-Village.sln",
+    "dotnet.defaultSolution": "Cinder-Village.slnx",
     "editor.defaultFormatter": "csharpier.csharpier-vscode",
     "[csharp]": {
         "editor.defaultFormatter": "csharpier.csharpier-vscode",
