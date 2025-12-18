@@ -43,7 +43,14 @@ Active development as a structured learning project.
 
 ---
 
+## AI Usage Policy
+
+In this day and age, it's important to be transparent about AI usage in development. This project uses AI tools as part of the learning and development process. For full details on how AI is used and the philosophy behind it, see the [AI Use Policy](Docs/Game_AI_Use_Policy.md).
+
+---
+
 ## Assets
 
 Assets in this project come from Pixel-Boy and AAA
 https://pixel-boy.itch.io/ninja-adventure-asset-pack
+
