@@ -5,6 +5,7 @@ A structured plan that pairs *theory you study* with *game features you build* i
 ---
 
 ## PHASE 0 — Foundations → Milestone 1: Player Movement
+COMPLETE 12/17/2025
 
 ### Theory
 - **Unity runtime model** (Update, FixedUpdate, LateUpdate)  
@@ -27,6 +28,7 @@ A structured plan that pairs *theory you study* with *game features you build* i
 ---
 
 ## PHASE 1 — Architecture Basics → Milestone 2: Interactions + Items
+IN PROGRESS...
 
 ### Theory
 - **Prefab architecture** (nested, variants)  
