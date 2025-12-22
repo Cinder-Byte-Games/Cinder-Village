@@ -7,6 +7,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
+        // Animator should be on this Graphics child
         animator = GetComponent<Animator>();
         if (animator == null)
         {
@@ -15,10 +16,14 @@ public class PlayerAnimator : MonoBehaviour
             return;
         }
 
-        input = GetComponent<PlayerInputHandler>();
+        // Input lives on the Player (parent), so search upwards
+        input = GetComponentInParent<PlayerInputHandler>();
         if (input == null)
         {
-            Debug.LogError("PlayerAnimator requires a PlayerInputHandler component!", this);
+            Debug.LogError(
+                "PlayerAnimator could not find PlayerInputHandler on a parent object!",
+                this
+            );
             enabled = false;
             return;
         }
