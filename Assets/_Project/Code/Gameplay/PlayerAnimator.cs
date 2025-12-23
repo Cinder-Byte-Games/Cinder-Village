@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
+    [SerializeField]
     private Animator animator;
+
+    [SerializeField]
     private PlayerInputHandler input;
 
     private void Awake()
     {
-        // Animator should be on this Graphics child
-        animator = GetComponent<Animator>();
         if (animator == null)
         {
             Debug.LogError("PlayerAnimator requires an Animator component!", this);
@@ -16,14 +17,9 @@ public class PlayerAnimator : MonoBehaviour
             return;
         }
 
-        // Input lives on the Player (parent), so search upwards
-        input = GetComponentInParent<PlayerInputHandler>();
         if (input == null)
         {
-            Debug.LogError(
-                "PlayerAnimator could not find PlayerInputHandler on a parent object!",
-                this
-            );
+            Debug.LogError("PlayerAnimator requires a PlayerInputHandler reference!", this);
             enabled = false;
             return;
         }
