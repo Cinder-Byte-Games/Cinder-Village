@@ -6,8 +6,8 @@ public class Interactor : MonoBehaviour
     private GameObject player;
 
     [SerializeField]
-    //How far in front of the player the box sits
-    //offset from center of the player
+    // How far in front of the player (along the current facing direction) the box sits,
+    // measured as a distance from the player's position.
     private float interactionDistance = 0.65f;
 
     private Interactable currentInteractable; // Tracks which object is currently in range
