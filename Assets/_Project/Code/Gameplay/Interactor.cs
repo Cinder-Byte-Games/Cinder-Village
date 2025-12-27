@@ -64,23 +64,15 @@ public class Interactor : MonoBehaviour
         //up -> (0, 1)
         //down -> (0, -1)
 
-        // Now adjust the box size based on direction
-        if (Mathf.Abs(facing.x) > Mathf.Abs(facing.y))
-        {
-            // Player is facing LEFT or RIGHT
-            // facing = (-1,0) or (1,0)
-            // abs(x) = 1, abs(y) = 0, so x > y is true
-            // Make box narrow horizontally (0.25), tall vertically (1)
-            interactionBox.size = new Vector2(0.25f, 1f);
-        }
-        else
-        {
-            // Player is facing UP or DOWN
-            // facing = (0,1) or (0,-1)
-            // abs(x) = 0, abs(y) = 1, so x > y is false
-            // Make box wide horizontally (1), narrow vertically (0.25)
-            interactionBox.size = new Vector2(1f, 0.25f);
-        }
+        // Adjust the box size based on direction:
+        // Player facing LEFT or RIGHT: abs(x) = 1, abs(y) = 0, so x > y is true
+        //   Make box narrow horizontally (0.25), tall vertically (1)
+        // Player facing UP or DOWN: abs(x) = 0, abs(y) = 1, so x > y is false
+        //   Make box wide horizontally (1), narrow vertically (0.25)
+        interactionBox.size =
+            (Mathf.Abs(facing.x) > Mathf.Abs(facing.y))
+                ? new Vector2(0.25f, 1f)
+                : new Vector2(1f, 0.25f);
     }
 
     /// <summary>
