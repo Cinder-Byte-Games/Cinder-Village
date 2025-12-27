@@ -7,26 +7,32 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 5f;
 
-    // Cached references to components on the same GameObject.
+    // Cached references to components assigned in the Inspector.
+    [SerializeField]
     private Rigidbody2D rb;
+
+    [SerializeField]
     private PlayerInputHandler input;
 
     private void Awake()
     {
-        // Grab the Rigidbody2D component. The null check below ensures it exists.
-        rb = GetComponent<Rigidbody2D>();
+        // Validate that required components are assigned.
         if (rb == null)
         {
-            Debug.LogError("PlayerMovement requires a Rigidbody2D component!", this);
+            Debug.LogError(
+                "PlayerMovement requires a Rigidbody2D component assigned in the Inspector!",
+                this
+            );
             enabled = false;
             return;
         }
 
-        // Grab the PlayerInputHandler to read input values.
-        input = GetComponent<PlayerInputHandler>();
         if (input == null)
         {
-            Debug.LogError("PlayerMovement requires a PlayerInputHandler component!", this);
+            Debug.LogError(
+                "PlayerMovement requires a PlayerInputHandler assigned in the Inspector!",
+                this
+            );
             enabled = false;
             return;
         }
@@ -35,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     // FixedUpdate runs at a fixed timestep, ideal for physics interactions.
     private void FixedUpdate()
     {
-        // Read the movement input
+        // Read the movement input from the inputhandler
         Vector2 move = input.MoveInput;
 
         // Apply the velocity: direction (move) times speed.
