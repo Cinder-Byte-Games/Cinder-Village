@@ -62,14 +62,14 @@ public class Interactor : MonoBehaviour
             // Move this GameObject's local position in front of the player
             // If facing right (1,0), position = (1,0) * 0.65 = (0.65, 0)
             // If facing up (0,1), position = (0,1) * 0.65 = (0, 0.65)
-            //local position is pos relative to parent
+            // Local position is pos relative to parent
             transform.localPosition = facing * interactionDistance;
 
-            //facing directions for reference:
-            //right -> (1, 0)
-            //left -> (-1, 0)
-            //up -> (0, 1)
-            //down -> (0, -1)
+            // Facing directions for reference:
+            // right -> (1, 0)
+            // left -> (-1, 0)
+            // up -> (0, 1)
+            // down -> (0, -1)
 
             // Adjust the box size based on direction:
             // Player facing LEFT or RIGHT: abs(x) = 1, abs(y) = 0, so x > y is true
