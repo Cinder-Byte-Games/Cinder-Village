@@ -57,7 +57,7 @@ public class Interactor : MonoBehaviour
         // Get the current facing direction from the input handler (up/down/left/right)
         Vector2 facing = inputHandler.FacingDirection;
 
-        if (facing != lastFacing) //only do resize operation if there was a change
+        if (facing != lastFacing) // Only do resize operation if there was a change
         {
             // Move this GameObject's local position in front of the player
             // If facing right (1,0), position = (1,0) * 0.65 = (0.65, 0)
