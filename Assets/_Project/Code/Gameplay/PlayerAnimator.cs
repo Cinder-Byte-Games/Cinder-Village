@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
+    [SerializeField]
     private Animator animator;
+
+    [SerializeField]
     private PlayerInputHandler input;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         if (animator == null)
         {
             Debug.LogError("PlayerAnimator requires an Animator component!", this);
@@ -15,10 +17,9 @@ public class PlayerAnimator : MonoBehaviour
             return;
         }
 
-        input = GetComponent<PlayerInputHandler>();
         if (input == null)
         {
-            Debug.LogError("PlayerAnimator requires a PlayerInputHandler component!", this);
+            Debug.LogError("PlayerAnimator requires a PlayerInputHandler reference!", this);
             enabled = false;
             return;
         }
