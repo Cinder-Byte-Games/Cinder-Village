@@ -14,6 +14,8 @@ public class Interactor : MonoBehaviour
     private BoxCollider2D interactionBox; // The trigger collider on this GameObject
     private PlayerInputHandler inputHandler; // Reference to get player's facing direction which is in the input handler script
 
+    private Vector2 lastFacing;
+
     private void Awake()
     {
         //error checks for critical objects
@@ -45,6 +47,9 @@ public class Interactor : MonoBehaviour
 
         //set if not set in unity
         interactionBox.isTrigger = true;
+
+        // Initialize lastFacing to match the starting direction
+        lastFacing = inputHandler.FacingDirection;
     }
 
     private void Update()
@@ -52,27 +57,32 @@ public class Interactor : MonoBehaviour
         // Get the current facing direction from the input handler (up/down/left/right)
         Vector2 facing = inputHandler.FacingDirection;
 
-        // Move this GameObject's local position in front of the player
-        // If facing right (1,0), position = (1,0) * 0.5 = (0.5, 0)
-        // If facing up (0,1), position = (0,1) * 0.5 = (0, 0.5)
-        //local position is pos relative to parent
-        transform.localPosition = facing * interactionDistance;
+        if (facing != lastFacing) //only do resize operation if there was a change
+        {
+            // Move this GameObject's local position in front of the player
+            // If facing right (1,0), position = (1,0) * 0.65 = (0.65, 0)
+            // If facing up (0,1), position = (0,1) * 0.65 = (0, 0.65)
+            //local position is pos relative to parent
+            transform.localPosition = facing * interactionDistance;
 
-        //facing directions for reference:
-        //right -> (1, 0)
-        //left -> (-1, 0)
-        //up -> (0, 1)
-        //down -> (0, -1)
+            //facing directions for reference:
+            //right -> (1, 0)
+            //left -> (-1, 0)
+            //up -> (0, 1)
+            //down -> (0, -1)
 
-        // Adjust the box size based on direction:
-        // Player facing LEFT or RIGHT: abs(x) = 1, abs(y) = 0, so x > y is true
-        //   Make box narrow horizontally (0.25), tall vertically (1)
-        // Player facing UP or DOWN: abs(x) = 0, abs(y) = 1, so x > y is false
-        //   Make box wide horizontally (1), narrow vertically (0.25)
-        interactionBox.size =
-            (Mathf.Abs(facing.x) > Mathf.Abs(facing.y))
-                ? new Vector2(0.25f, 1f)
-                : new Vector2(1f, 0.25f);
+            // Adjust the box size based on direction:
+            // Player facing LEFT or RIGHT: abs(x) = 1, abs(y) = 0, so x > y is true
+            //   Make box narrow horizontally (0.25), tall vertically (1)
+            // Player facing UP or DOWN: abs(x) = 0, abs(y) = 1, so x > y is false
+            //   Make box wide horizontally (1), narrow vertically (0.25)
+            interactionBox.size =
+                (Mathf.Abs(facing.x) > Mathf.Abs(facing.y))
+                    ? new Vector2(0.25f, 1f)
+                    : new Vector2(1f, 0.25f);
+        }
+
+        lastFacing = facing;
     }
 
     /// <summary>
