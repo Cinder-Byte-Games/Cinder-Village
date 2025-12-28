@@ -6,7 +6,7 @@ public class PlayerInputHandler : MonoBehaviour
     // Property holding the current movement input (x,y). Public to read, private to set.
     public Vector2 MoveInput { get; private set; }
 
-    // Track the last non-zero facing direction (defaults to down)
+    // Track the last non-zero facing direction (defaults to down) and persist it when movement stops
     public Vector2 FacingDirection { get; private set; } = Vector2.down;
 
     // Called by Unity’s Input System when the Move action updates.
