@@ -6,6 +6,10 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField]
     private string promptText = "Interact";
 
+    // Reference to the Canvas GameObject that holds the prompt UI
+    [SerializeField]
+    private Canvas promptCanvas;
+
     /// <summary>
     /// Public read-only property that exposes the prompt text.
     /// </summary>
@@ -17,7 +21,11 @@ public abstract class Interactable : MonoBehaviour
     /// </summary>
     public virtual void OnPlayerEnterRange(GameObject player)
     {
-        // No UI yet; keep it simple.
+        // Show the prompt UI
+        if (promptCanvas != null)
+        {
+            promptCanvas.gameObject.SetActive(true);
+        }
         Debug.Log($"{player.name} entered range of {name} (Prompt: {promptText})");
     }
 
@@ -27,6 +35,11 @@ public abstract class Interactable : MonoBehaviour
     /// </summary>
     public virtual void OnPlayerExitRange(GameObject player)
     {
+        // Hide the prompt UI
+        if (promptCanvas != null)
+        {
+            promptCanvas.gameObject.SetActive(false);
+        }
         Debug.Log($"{player.name} exited range of {name}");
     }
 
