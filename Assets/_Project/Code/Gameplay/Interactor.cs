@@ -5,10 +5,15 @@ public class Interactor : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    [SerializeField]
     // How far in front of the player (along the current facing direction) the box sits,
     // measured as a distance from the player's position.
-    private float interactionDistance = 0.65f;
+    private const float InteractionDistance = 0.65f;
+
+    // Size of the interaction box when player is facing horizontally (left/right)
+    private static readonly Vector2 HorizontalBoxSize = new Vector2(0.5f, 0.65f);
+
+    // Size of the interaction box when player is facing vertically (up/down)
+    private static readonly Vector2 VerticalBoxSize = new Vector2(0.65f, 0.5f);
 
     private Interactable currentInteractable; // Tracks which object is currently in range
     private BoxCollider2D interactionBox; // The trigger collider on this GameObject
@@ -63,7 +68,7 @@ public class Interactor : MonoBehaviour
             // If facing right (1,0), position = (1,0) * 0.65 = (0.65, 0)
             // If facing up (0,1), position = (0,1) * 0.65 = (0, 0.65)
             // Local position is pos relative to parent
-            transform.localPosition = facing * interactionDistance;
+            transform.localPosition = facing * InteractionDistance;
 
             // Facing directions for reference:
             // right -> (1, 0)
@@ -77,9 +82,7 @@ public class Interactor : MonoBehaviour
             // Player facing UP or DOWN: abs(x) = 0, abs(y) = 1, so x > y is false
             //   Make box wide horizontally (1), narrow vertically (0.25)
             interactionBox.size =
-                (Mathf.Abs(facing.x) > Mathf.Abs(facing.y))
-                    ? new Vector2(0.25f, 1f)
-                    : new Vector2(1f, 0.25f);
+                (Mathf.Abs(facing.x) > Mathf.Abs(facing.y)) ? HorizontalBoxSize : VerticalBoxSize;
         }
 
         lastFacing = facing;
